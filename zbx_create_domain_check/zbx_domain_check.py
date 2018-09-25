@@ -77,7 +77,7 @@ if not zbx_item:
             "interfaceid":zbx_interface[0]['interfaceid'],
             "type": 0,
             "value_type": 3,
-            "delay": 30
+            "delay": '1d'
 
         }
     )
@@ -87,10 +87,28 @@ if not zbx_item:
         zab_trigger = zapi.trigger.create (
             {
                 "description": "domain expiration " + domainName,
-                "expression":"{content_check." + pr_name + ":domain_exp[" + domainName + "].last()}=20 or {content_check." + pr_name + ":domain_exp["+ domainName + "].last()}=3",
+                "expression":"{content_check." + pr_name + ":domain_exp[" + domainName + "].last()}=20",
+                "url": "http://" + domainName,
+		"comments":"",
+                "priority":"3"
+            }
+        )
+        zab_trigger = zapi.trigger.create (
+            {
+                "description": "domain expiration " + domainName,
+                "expression":"{content_check." + pr_name + ":domain_exp[" + domainName + "].last()}=5",
                 "url": "http://" + domainName,
 		"comments":"",
                 "priority":"4"
+            }
+        )
+        zab_trigger = zapi.trigger.create (
+            {
+                "description": "domain expiration " + domainName,
+                "expression":"{content_check." + pr_name + ":domain_exp[" + domainName + "].last()}=3",
+                "url": "http://" + domainName,
+		"comments":"",
+                "priority":"5"
             }
         )
         print ("Trigger create: [OK]")
