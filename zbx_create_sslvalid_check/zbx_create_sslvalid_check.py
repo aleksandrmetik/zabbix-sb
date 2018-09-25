@@ -7,17 +7,6 @@ import argparse
 import os
 from zabbix_api import ZabbixAPI
 
-#Define git update module
-
-execfile(os.path.dirname(os.path.realpath(__file__)) + '/../git_update.py')
-
-#Try to get update from git
-
-if git_check_update(os.path.dirname(os.path.realpath(__file__))) == 1:
-    # if not up to day update and exit
-    exit (0)
-
-
 #Define zabbix config file
 
 zbx_conf_file =os.path.dirname(os.path.realpath(__file__)) + '/../conf/zabbix.conf'
@@ -34,13 +23,16 @@ zapi.login(zbx_user,zbx_pass)
 
 
 parser = argparse.ArgumentParser(description='Arguments to add domain expier check')
-parser.add_argument('-p', '--prname', action='store', required=True, default='None',  dest='Projectname', help='Projec name in zabbix')
-parser.add_argument('-d', '--domain', dest='domainName', action='store',required=True, default=None,  help='Domain name to monitor')
+parser.add_argument('--prname', action='store', required=True, default='None',  dest='Projectname', help='Projec name in zabbix')
+parser.add_argument('--domain', dest='domainName', action='store',required=True, default=None,  help='Domain name to monitor')
+parser.add_argument('--delay', dest='delay', action='store',required=True, default='1d',  help='Execution intervalof the checks. Accepts seconds, time unit with suffix. Example 5s, 1m, 1d and etc ')
+
 args =  parser.parse_args()
 
 
 pr_name = args.Projectname
 domainName =  args.domainName
+delay =  args.delay
 
 zbx_host_get = zapi.host.get(
     {
@@ -82,7 +74,7 @@ if not zbx_item:
             "interfaceid":zbx_interface[0]['interfaceid'],
             "type": 0,
             "value_type": 3,
-            "delay": 30
+            "delay": delay
 
         }
     )
@@ -95,7 +87,25 @@ if not zbx_item:
                 "expression":"{content_check." + pr_name + ":ssl_exp[" + domainName + "].last()}=20",
                 "comments":"",
                 "url": "https://" + domainName,
+                "priority":"3"
+            }
+        )
+        zab_trigger = zapi.trigger.create (
+            {
+                "description": "SSL certificate for " + domainName + " expires in 5 days",
+                "expression":"{content_check." + pr_name + ":ssl_exp[" + domainName + "].last()}=5",
+                "comments":"",
+                "url": "https://" + domainName,
                 "priority":"4"
+            }
+        )
+        zab_trigger = zapi.trigger.create (
+            {
+                "description": "SSL certificate for " + domainName + " expires in 3 days",
+                "expression":"{content_check." + pr_name + ":ssl_exp[" + domainName + "].last()}=3",
+                "comments":"",
+                "url": "https://" + domainName,
+                "priority":"5"
             }
         )
         print ("Trigger create: [OK]")
