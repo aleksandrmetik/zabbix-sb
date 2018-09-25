@@ -6,6 +6,8 @@ __version__ = '2.1'
 import argparse
 import random
 import os
+import string
+import re
 from zabbix_api import ZabbixAPI
 
 def password(pw_length):
@@ -272,9 +274,8 @@ else:
                 {
                     "alias": project_name,
                     "passwd": zbx_pass,
-                    "usrgrps": usergroup['usrgrpids'][0]
-
-                }
+                    "usrgrps": [{'usrgrpid':'%s' % usergroup['usrgrpids'][0]}]
+		}
             )
             if user:
                 print ("Не забудте занести учетные данные пользователя, для доступа к zabbix, в wiki:\n")
@@ -284,3 +285,5 @@ else:
                        + "pass: " + zbx_pass)
             else:
                 print ('Не удалось создать пользователя.')
+
+		#   "usrgrps": usergroup['usrgrpids'][0]
