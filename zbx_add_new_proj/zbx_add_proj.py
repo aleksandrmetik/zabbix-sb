@@ -76,14 +76,14 @@ print ("Группа создана\n")
 
 zbx_host_icmp = zapi.host.create(
     {
-        "host": "icmp_rus." + project_name,
-        "proxy_hostid": 568884,
+        "host": "icmp." + project_name,
+      # "proxy_hostid": 568884,
         "interfaces":
             {
                 "type": 1,
                 "main": 1,
                 "useip": 1,
-                "ip": "139.59.156.212",
+                "ip": "18.185.171.185",
                 "dns": "",
                 "port": "10050"
             },
@@ -95,7 +95,8 @@ zbx_host_icmp = zapi.host.create(
         "templates":
             [
                 {
-                    "templateid": "568887"
+		# Template Module ICMP Ping
+                    "templateid": "10186"
                 }
             ]
 
@@ -130,7 +131,7 @@ zbx_host_content = zapi.host.create(
                 "groupid": int(hostgroup['groupids'][0])
             },
 	    {
-	    	"groupid": 144
+	    	"groupid": 20
 	    }
         ]
         
@@ -172,7 +173,8 @@ result = zapi.action.create ( {
                                         },
                                         {
                                             "operationtype":6,
-                                            "optemplate":[{"templateid":"10001" },{"templateid":"10106"}, {"templateid":"10112"} ]
+					# Template HTTP, HTTPS, SSH
+                                            "optemplate":[{"templateid":"10094" },{"templateid":"10095"},{"templateid":"10102"} ]
                                         },
 
                                     ]
@@ -208,6 +210,7 @@ result = zapi.action.create ( {
                                         },
                                         {
                                             "operationtype":6,
+					# Template OS LINUX
                                             "optemplate":[{"templateid":"10001" }]
                                         },
 

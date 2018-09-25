@@ -7,17 +7,6 @@ import argparse
 import os
 from zabbix_api import ZabbixAPI
 
-#Define git update module
-
-execfile(os.path.dirname(os.path.realpath(__file__)) + '/../git_update.py')
-
-#Try to get update from git
-
-if git_check_update(os.path.dirname(os.path.realpath(__file__))) == 1:
-    # if not up to day update and exit
-    exit (0)
-
-
 #Define zabbix config file
 
 zbx_conf_file =os.path.dirname(os.path.realpath(__file__)) + '/../conf/zabbix.conf'
