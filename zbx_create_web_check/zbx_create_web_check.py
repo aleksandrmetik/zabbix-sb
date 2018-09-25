@@ -1,7 +1,10 @@
 #!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
-__author__ = 'vladimirg'
-__version__ = '1.2'
+__preauthor__ = 'vladimirg'
+__preversion__ = '1.2'
+
+__author__ = 'aleksandrmetik'
+__version__ = '2.0'
 
 from zabbix_api import ZabbixAPI
 import os
