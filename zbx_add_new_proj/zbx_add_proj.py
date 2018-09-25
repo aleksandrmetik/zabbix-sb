@@ -85,7 +85,7 @@ zbx_host_icmp = zapi.host.create(
                 "type": 1,
                 "main": 1,
                 "useip": 1,
-                "ip": "18.185.171.185",
+                "ip": "127.0.0.1",
                 "dns": "",
                 "port": "10050"
             },
@@ -98,7 +98,7 @@ zbx_host_icmp = zapi.host.create(
             [
                 {
 		# Template Module ICMP Ping
-                    "templateid": "10186"
+                #    "templateid": "10186"
                 }
             ]
 
@@ -280,10 +280,9 @@ else:
             if user:
                 print ("Не забудте занести учетные данные пользователя, для доступа к zabbix, в wiki:\n")
                 print ("h2. Система мониторинга\n\n" 
-                       + "host: zabbix.southbridge.ru\n" 
+                       + "host: zabbix.spiralscout.com\n" 
                        + "user: " + project_name + "\n" 
                        + "pass: " + zbx_pass)
             else:
                 print ('Не удалось создать пользователя.')
 
-		#   "usrgrps": usergroup['usrgrpids'][0]

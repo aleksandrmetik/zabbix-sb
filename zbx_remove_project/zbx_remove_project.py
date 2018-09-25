@@ -36,16 +36,6 @@ for tmp_line in open(zbx_conf_file):
 zapi = ZabbixAPI(zbx_server)
 zapi.login(zbx_user, zbx_pass)
 
-# Define git update module
-
-execfile(os.path.dirname(os.path.realpath(__file__)) + '/../git_update.py')
-
-# Try to get update from git
-
-if git_check_update(os.path.dirname(os.path.realpath(__file__))) == 1:
-    # if not up to day update and exit
-    exit(0)
-
 parser = argparse.ArgumentParser(description='Arguments to web test in zabbix')
 parser.add_argument('--prname', required=True, action='store', default=None, dest='proj',
                     help='Project name in zabbix. For example: southbridge.ru')
