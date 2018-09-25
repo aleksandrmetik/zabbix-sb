@@ -1,13 +1,14 @@
 ## Описание
 
+Current status: Ready to implement in Jenkins
+
 Скрипт предназначен для создания веб проверок в zabbix. На данный момент скрипт умеет создавать только простые проверки и состояшие только из одного шага. Вместе с проверокой сразу же создается триггер.
 Если нужна более сложная проверка, стоит создать простую проверку скриптом, а потом уже добавить в нее необходимые изменения.
-Проверка автоматически проверяет, если в url указан https, то создается проверка на срок окончания сертификата.
 
 ## Запуск
 
 ```
-python zbx_create_web_check/zbx_create_web_check.py --url "https://southbridge.ru" --pattern "southbridge" --prname "southbridge.ru" --desc "Test check"
+python zbx_create_web_check/zbx_create_web_check.py --url "https://southbridge.ru" --pattern "southbridge" --prname "southbridge.ru" --desc "Test check" --delay "1m" --timeout 30 --followredirect 1 --httpcode 200
 ```
 
 Где: 
@@ -15,5 +16,7 @@ python zbx_create_web_check/zbx_create_web_check.py --url "https://southbridge.r
 * --pattern - паттерн который будет искаться по указанному url
 * --prname - имя проекта в zabbix, в котором будет создана проверка
 * --desc - произвольное описание проекта, в свободной форме. Допускается пустое значение ""
-
-По умолчанию проверяется 200 кода.
+* --delay - Частота проверки, можно, примеры 30s 1m 5m 1h 1d
+* --timeout - Таймаут ожидания ответа, по умолчанию 30 (секунд)
+* --followredirect - Следовать ридеректам? По умолчанию 1 (да), 0 - не будет следовать редиректам
+* --httpcode - Какой HTTP код мы ожидаем? По умолчанию 200
