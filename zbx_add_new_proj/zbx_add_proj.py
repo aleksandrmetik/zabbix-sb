@@ -283,6 +283,17 @@ else:
                        + "host: zabbix.spiralscout.com\n" 
                        + "user: " + project_name + "\n" 
                        + "pass: " + zbx_pass)
+
+		os.putenv("TextMain", "Не забудте занести учетные данные пользователя, для доступа к zabbix, в wiki:\n" 
+                           + "h2. Система мониторинга\n\n") 
+		os.putenv("TextURL", "host: zabbix.spiralscout.com\n") 
+	        os.putenv("TextUser", "User:" + project_name + "\n")
+                os.putenv("TextPass", "Password:" + zbx_pass )
+                os.system("echo $TextMain")
+                os.system("echo $TextURL")
+                os.system("echo $TextUser")
+                os.system("echo $TextPass")
+
             else:
                 print ('Не удалось создать пользователя.')
 
