@@ -280,7 +280,7 @@ else:
             if user:
                 print ("Не забудте занести учетные данные пользователя, для доступа к zabbix, в wiki:\n")
                 print ("h2. Система мониторинга\n\n" 
-                       + "host: zabbix.spiralscout.com\n" 
+                       + "host: https:\/\/zabbix.spiralscout.com\n" 
                        + "user: " + project_name + "\n" 
                        + "pass: " + zbx_pass)
 
@@ -288,7 +288,7 @@ else:
  
 		file.write("TextMain=Не забудте занести учетные данные пользователя, для доступа к zabbix, в wiki:\n") 
 		file.write("TextMain2= Система мониторинга\n") 
-		file.write("TextUrl=host: zabbix.spiralscout.com\n") 
+		file.write("TextUrl=host: https:\/\/zabbix.spiralscout.com\n") 
 		file.write("TextUser=user: " + project_name + "\n") 
 		file.write("TextPass=pass: " + zbx_pass + "\n") 
 		file.close() 
