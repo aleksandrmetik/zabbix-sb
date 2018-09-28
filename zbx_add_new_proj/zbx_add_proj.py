@@ -287,7 +287,7 @@ else:
 		file = open(project_name,"w") 
  
 		file.write("TextMain=Не забудте занести учетные данные пользователя, для доступа к zabbix, в wiki:\n") 
-		file.write("TextMain2=h2. Система мониторинга\n") 
+		file.write("TextMain2= Система мониторинга\n") 
 		file.write("TextUrl=host: zabbix.spiralscout.com\n") 
 		file.write("TextUser=user: " + project_name + "\n") 
 		file.write("TextPass=pass: " + zbx_pass + "\n") 
