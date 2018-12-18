@@ -86,8 +86,8 @@ if not zbx_item:
     if zbx_item:
         zab_trigger = zapi.trigger.create (
             {
-                "description": "domain expiration " + domainName,
-                "expression":"{content_check." + pr_name + ":domain_exp[" + domainName + "].last()}=20",
+                "description": "domain expiration <21d " + domainName,
+                "expression":"{content_check." + pr_name + ":domain_exp[" + domainName + "].last()}<21",
                 "url": "http://" + domainName,
 		"comments":"",
                 "priority":"3"
@@ -95,8 +95,8 @@ if not zbx_item:
         )
         zab_trigger = zapi.trigger.create (
             {
-                "description": "domain expiration " + domainName,
-                "expression":"{content_check." + pr_name + ":domain_exp[" + domainName + "].last()}=5",
+                "description": "domain expiration <6d " + domainName,
+                "expression":"{content_check." + pr_name + ":domain_exp[" + domainName + "].last()}<6",
                 "url": "http://" + domainName,
 		"comments":"",
                 "priority":"4"
@@ -104,8 +104,8 @@ if not zbx_item:
         )
         zab_trigger = zapi.trigger.create (
             {
-                "description": "domain expiration " + domainName,
-                "expression":"{content_check." + pr_name + ":domain_exp[" + domainName + "].last()}=3",
+                "description": "domain expiration <3d " + domainName,
+                "expression":"{content_check." + pr_name + ":domain_exp[" + domainName + "].last()}<3",
                 "url": "http://" + domainName,
 		"comments":"",
                 "priority":"5"

@@ -83,8 +83,8 @@ if not zbx_item:
     if zbx_item:
         zab_trigger = zapi.trigger.create (
             {
-                "description": "SSL certificate for " + domainName + " expires in 20 days",
-                "expression":"{content_check." + pr_name + ":ssl_exp[" + domainName + "].last()}=20",
+                "description": "SSL cert " + domainName + " expires in 20 days",
+                "expression":"{content_check." + pr_name + ":ssl_exp[" + domainName + "].last()}<21",
                 "comments":"",
                 "url": "https://" + domainName,
                 "priority":"3"
@@ -92,8 +92,8 @@ if not zbx_item:
         )
         zab_trigger = zapi.trigger.create (
             {
-                "description": "SSL certificate for " + domainName + " expires in 5 days",
-                "expression":"{content_check." + pr_name + ":ssl_exp[" + domainName + "].last()}=5",
+                "description": "SSL cert " + domainName + " expires in 5 days",
+                "expression":"{content_check." + pr_name + ":ssl_exp[" + domainName + "].last()}<6",
                 "comments":"",
                 "url": "https://" + domainName,
                 "priority":"4"
@@ -101,8 +101,8 @@ if not zbx_item:
         )
         zab_trigger = zapi.trigger.create (
             {
-                "description": "SSL certificate for " + domainName + " expires in 3 days",
-                "expression":"{content_check." + pr_name + ":ssl_exp[" + domainName + "].last()}=3",
+                "description": "SSL cert " + domainName + " expires in 3 days",
+                "expression":"{content_check." + pr_name + ":ssl_exp[" + domainName + "].last()}<3",
                 "comments":"",
                 "url": "https://" + domainName,
                 "priority":"5"
