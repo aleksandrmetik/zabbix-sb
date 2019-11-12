@@ -87,7 +87,7 @@ if zbx_host_get:
 result = zapi.httptest.create({
                                 "name": "check content " +  name,
                                 "hostid": zbx_host_get[0]['hostid'],
-                                "variables":'',
+                               # "variables":'',
                                # "headers":'',
                                 "delay": delay,
                                 "steps": [
